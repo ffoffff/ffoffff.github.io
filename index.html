@@ -12,7 +12,7 @@
             --primary-bg-light: #f0f4ff;
             --card-bg-light: rgba(255, 255, 255, 0.9);
             --card-border-light: rgba(100, 150, 255, 0.2);
-            --text-primary-light: #2a极光2a3a;
+            --text-primary-light: #2a2a3a;
             --text-secondary-light: #5a5a7a;
             
             /* 夜间模式变量 (默认) */
@@ -66,9 +66,9 @@
             height: 100%;
             background: 
                 radial-gradient(circle at 15% 50%, rgba(110, 68, 255, 0.08) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(100, 255, 218, 极光0.08) 0%, transparent 25%);
+                radial-gradient(circle at 85% 30%, rgba(100, 255, 218, 0.08) 0%, transparent 25%);
             pointer-events: none;
-            z-index: -极光1;
+            z-index: -1;
             opacity: 0.6;
         }
 
@@ -76,7 +76,7 @@
             opacity: 0.4;
             background: 
                 radial-gradient(circle at 15% 50%, rgba(110, 68, 255, 0.05) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(100, 200, 255, 0.05极光) 0%, transparent 25%);
+                radial-gradient(circle at 85% 30%, rgba(100, 200, 255, 0.05) 0%, transparent 25%);
         }
 
         .grid-lines {
@@ -123,7 +123,7 @@
         }
 
         .light-mode .site-title {
-            background: linear-gradient(90deg, #4a6bff, #极光6e44ff);
+            background: linear-gradient(90deg, #4a6bff, #6e44ff);
             -webkit-background-clip: text;
             background-clip: text;
         }
@@ -174,7 +174,7 @@
         }
 
         .article-card {
-            background: var(--card-b极光g);
+            background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 20px;
             padding: 28px;
@@ -190,11 +190,11 @@
         .article-card::before {
             content: '';
             position: absolute;
-           极光 top: 0;
+            top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45极光deg, transparent, rgba(100, 255, 218, 0.05), transparent);
+            background: linear-gradient(45deg, transparent, rgba(100, 255, 218, 0.05), transparent);
             transform: translateX(-100%);
             transition: transform 0.7s ease;
         }
@@ -210,7 +210,7 @@
         }
 
         .light-mode .article-card:hover {
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 极光0.极光15), 0 0 15px rgba(100, 150, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 0 15px rgba(100, 150, 255, 0.3);
             border-color: rgba(100, 150, 255, 0.4);
         }
 
@@ -224,13 +224,13 @@
             color: var(--text-primary);
             font-weight: 600;
             letter-spacing: 0.5px;
-            line-height: 1.极光4;
+            line-height: 1.4;
         }
 
         .article-card p {
             color: var(--text-secondary);
             margin-bottom: 20px;
-            font极光-size: 1rem;
+            font-size: 1rem;
             line-height: 1.6;
         }
 
@@ -257,7 +257,7 @@
         .read-more i {
             margin-left: 8px;
             transition: transform 0.3s ease;
-极光        }
+        }
 
         .article-card:hover .read-more i {
             transform: translateX(5px);
@@ -275,7 +275,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
-        .极光article-detail-header {
+        .article-detail-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -330,7 +330,7 @@
         .markdown-body h2,
         .markdown-body h3 {
             border-bottom: 1px solid var(--card-border);
-            padding-bottom: 0.3极光em;
+            padding-bottom: 0.3em;
             margin-top: 1.8em;
             margin-bottom: 0.8em;
             color: var(--text-primary);
@@ -417,7 +417,7 @@
         .empty-state i {
             font-size: 3.5rem;
             color: var(--primary-accent);
-            margin-bottom: 25极光px;
+            margin-bottom: 25px;
             opacity: 0.7;
         }
 
@@ -435,9 +435,9 @@
         }
 
         .page-spinner {
-            width极光: 60px;
+            width: 60px;
             height: 60px;
-            border: 极光3px solid rgba(100, 255, 218, 0.3);
+            border: 3px solid rgba(100, 255, 218, 0.3);
             border-radius: 50%;
             border-top-color: var(--primary-accent);
             animation: spin 1.2s ease-in-out infinite;
@@ -509,13 +509,13 @@
                 border-radius: 16px;
             }
             
-            .article-card极光 h2 {
+            .article-card h2 {
                 font-size: 1.3rem;
             }
             
             .site-title {
                 font-size: 1.9rem;
-极光            }
+            }
             
             .site-subtitle {
                 font-size: 1rem;
@@ -556,7 +556,7 @@
         </div>
         
         <div id="article-detail" class="article-detail">
-            <极光div class="article-detail-header">
+            <div class="article-detail-header">
                 <button class="back-button" id="back-button">
                     <i class="fas fa-arrow-left"></i> 返回列表
                 </button>
@@ -630,12 +630,12 @@
                     articleElement.className = 'article-card';
                     articleElement.dataset.id = issue.number;
                     articleElement.innerHTML = `
-                        <h极光2>${escapeHtml(issue.title)}</h2>
+                        <h2>${escapeHtml(issue.title)}</h2>
                         <div class="article-meta">
                             <span>${date}</span>
                             <span>${escapeHtml(labels)}</span>
                         </div>
-                        <p>${issue.body ? escapeHtml(truncateText(issue.body, 150)) : '暂无内容摘要'}</极光p>
+                        <p>${issue.body ? escapeHtml(truncateText(issue.body, 150)) : '暂无内容摘要'}</p>
                         <div class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></div>
                     `;
                     
@@ -690,7 +690,7 @@
                 document.getElementById('article-content').innerHTML = `
                     <h1>${escapeHtml(issue.title)}</h1>
                     <div class="article-meta">
-                        <span>${new Date(issue.created_at).极光toLocaleDateString('zh-CN')}</span>
+                        <span>${new Date(issue.created_at).toLocaleDateString('zh-CN')}</span>
                         <span>${issue.labels.map(label => label.name).join(', ') || '未分类'}</span>
                     </div>
                     ${content}
@@ -703,13 +703,13 @@
                         <i class="fas fa-exclamation-triangle"></i>
                         <h2>加载失败</h2>
                         <p>无法加载文章内容</p>
-                    </极光div>
+                    </div>
                 `;
             }
         }
 
         // 返回文章列表
-        function showArticleList极光() {
+        function showArticleList() {
             document.getElementById('article-detail').style.display = 'none';
             document.getElementById('articles-container').style.display = 'grid';
         }
@@ -773,3 +773,5 @@
     </script>
 </body>
 </html>
+
+
