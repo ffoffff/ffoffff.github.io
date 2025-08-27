@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Note time awa</title>
+    <title>我的文章空间</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
     <style>
         :root {
             --primary-bg: #0a0e17;
@@ -105,6 +106,7 @@
             overflow: hidden;
             transform: translateY(0);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            cursor: pointer;
         }
 
         .article-card::before {
@@ -174,6 +176,93 @@
             transform: translateX(5px);
         }
 
+        /* 文章详情页样式 */
+        .article-detail {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+        }
+
+        .article-detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .article-detail h1 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .back-button {
+            background: rgba(100, 255, 218, 0.1);
+            border: 1px solid var(--primary-accent);
+            color: var(--primary-accent);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .back-button i {
+            margin-right: 8px;
+        }
+
+        .back-button:hover {
+            background: rgba(100, 255, 218, 0.2);
+        }
+
+        .markdown-body {
+            color: var(--text-primary);
+            background: transparent;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .markdown-body h1,
+        .markdown-body h2,
+        .markdown-body h3 {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.3em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .markdown-body p {
+            margin-bottom: 1em;
+        }
+
+        .markdown-body code {
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--primary-accent);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+
+        .markdown-body pre {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1em;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+
+        .markdown-body pre code {
+            background: transparent;
+            color: var(--text-primary);
+            padding: 0;
+        }
+
         .empty-state {
             text-align: center;
             padding: 60px 20px;
@@ -215,7 +304,8 @@
                 gap: 20px;
             }
             
-            .article-card {
+            .article-card,
+            .article-detail {
                 padding: 20px;
             }
             
@@ -226,6 +316,10 @@
             .site-title {
                 font-size: 2rem;
             }
+            
+            .article-detail h1 {
+                font-size: 1.6rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -233,7 +327,8 @@
                 padding: 0;
             }
             
-            .article-card {
+            .article-card,
+            .article-detail {
                 padding: 18px;
             }
             
@@ -248,6 +343,10 @@
             .site-subtitle {
                 font-size: 1rem;
             }
+            
+            .article-detail h1 {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
@@ -256,8 +355,17 @@
     
     <div class="container">
         <div class="header">
-            <h1 class="site-title">My Note</h1>
-            <p class="site-subtitle">FF</p>
+            <h1 class="site-title">我的文章空间</h1>
+            <p class="site-subtitle">分享与探索</p>
+        </div>
+        
+        <div id="article-detail" class="article-detail">
+            <div class="article-detail-header">
+                <button class="back-button" id="back-button">
+                    <i class="fas fa-arrow-left"></i> 返回列表
+                </button>
+            </div>
+            <div id="article-content" class="markdown-body"></div>
         </div>
         
         <div class="articles-grid" id="articles-container">
@@ -267,23 +375,27 @@
         </div>
     </div>
 
+    <!-- 引入Markdown解析器 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
     <script>
         // 配置您的GitHub信息
         const config = {
             owner: 'ffoffff', // 替换为您的GitHub用户名
             repo: 'ffoffff.github.io',   // 替换为您的仓库名
             perPage: 20,                    // 每页显示的文章数量
-            labels: ''                      // 可选：只显示特定标签的文章，留空则显示所有
         };
 
-        // 从GitHub Issues获取文章
+        // 当前状态管理
+        let currentState = {
+            viewingArticle: null,
+            articles: []
+        };
+
+        // 从GitHub Issues获取文章列表
         async function loadArticles() {
             try {
-                let apiUrl = `https://api.github.com/repos/${config.owner}/${config.repo}/issues?per_page=${config.perPage}&state=open`;
-                
-                if (config.labels) {
-                    apiUrl += `&labels=${encodeURIComponent(config.labels)}`;
-                }
+                const apiUrl = `https://api.github.com/repos/${config.owner}/${config.repo}/issues?per_page=${config.perPage}&state=open`;
                 
                 const response = await fetch(apiUrl);
                 
@@ -306,15 +418,16 @@
                     return;
                 }
                 
-                issues.forEach(issue => {
-                    // 跳过pull request
-                    if (issue.pull_request) return;
-                    
+                // 保存文章列表供后续使用
+                currentState.articles = issues.filter(issue => !issue.pull_request);
+                
+                currentState.articles.forEach(issue => {
                     const date = new Date(issue.created_at).toLocaleDateString('zh-CN');
                     const labels = issue.labels.map(label => label.name).join(', ') || '未分类';
                     
                     const articleElement = document.createElement('article');
                     articleElement.className = 'article-card';
+                    articleElement.dataset.id = issue.number;
                     articleElement.innerHTML = `
                         <h2>${escapeHtml(issue.title)}</h2>
                         <div class="article-meta">
@@ -322,8 +435,14 @@
                             <span>${escapeHtml(labels)}</span>
                         </div>
                         <p>${issue.body ? escapeHtml(truncateText(issue.body, 150)) : '暂无内容摘要'}</p>
-                        <a href="${issue.html_url}" target="_blank" class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></a>
+                        <div class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></div>
                     `;
+                    
+                    // 添加点击事件
+                    articleElement.addEventListener('click', () => {
+                        showArticleDetail(issue.number);
+                    });
+                    
                     container.appendChild(articleElement);
                 });
                 
@@ -341,21 +460,94 @@
             }
         }
 
+        // 显示文章详情
+        async function showArticleDetail(issueNumber) {
+            try {
+                // 显示加载状态
+                document.getElementById('articles-container').style.display = 'none';
+                document.getElementById('article-detail').style.display = 'block';
+                document.getElementById('article-content').innerHTML = `
+                    <div class="loader">
+                        <div class="spinner"></div>
+                    </div>
+                `;
+                
+                // 尝试从已加载的文章中获取数据
+                let issue = currentState.articles.find(a => a.number === issueNumber);
+                
+                // 如果文章内容未完全加载，则从API获取完整数据
+                if (!issue || !issue.body) {
+                    const apiUrl = `https://api.github.com/repos/${config.owner}/${config.repo}/issues/${issueNumber}`;
+                    const response = await fetch(apiUrl);
+                    
+                    if (!response.ok) {
+                        throw new Error(`无法获取文章详情: ${response.status}`);
+                    }
+                    
+                    issue = await response.json();
+                }
+                
+                // 解析Markdown内容
+                const content = marked.parse(issue.body || '暂无内容');
+                
+                // 显示文章详情
+                document.getElementById('article-content').innerHTML = `
+                    <h1>${escapeHtml(issue.title)}</h1>
+                    <div class="article-meta">
+                        <span>${new Date(issue.created_at).toLocaleDateString('zh-CN')}</span>
+                        <span>${issue.labels.map(label => label.name).join(', ') || '未分类'}</span>
+                    </div>
+                    ${content}
+                `;
+                
+            } catch (error) {
+                console.error('加载文章详情失败:', error);
+                document.getElementById('article-content').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h2>加载失败</h2>
+                        <p>${error.message || '无法加载文章内容'}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // 返回文章列表
+        function showArticleList() {
+            document.getElementById('article-detail').style.display = 'none';
+            document.getElementById('articles-container').style.display = 'grid';
+        }
+
         // 辅助函数：截断文本
         function truncateText(text, maxLength) {
-            if (text.length <= maxLength) return text;
+            if (!text || text.length <= maxLength) return text;
             return text.substring(0, maxLength) + '...';
         }
 
         // 辅助函数：转义HTML特殊字符
         function escapeHtml(text) {
+            if (!text) return '';
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
 
         // 页面加载时获取文章
-        window.addEventListener('load', loadArticles);
+        window.addEventListener('load', () => {
+            loadArticles();
+            
+            // 添加返回按钮事件
+            document.getElementById('back-button').addEventListener('click', showArticleList);
+        });
+
+        // 处理浏览器前进后退
+        window.addEventListener('popstate', (event) => {
+            if (event.state && event.state.articleId) {
+                showArticleDetail(event.state.articleId);
+            } else {
+                showArticleList();
+            }
+        });
     </script>
 </body>
 </html>
