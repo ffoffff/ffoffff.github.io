@@ -1,60 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<meta name="format-detection" content="telephone=no, email=no" />
-<meta name="x5-orientation" content="portrait" />
-<meta name="x5-fullscreen" content="true" />
-<meta name="x5-page-mode" content="app" />
-<title>Spring is a blog engine written by github issues</title>
-<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57x57.png" />
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114x114.png" />
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-114x114.png" />
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144x144.png" />
-<link rel="apple-touch-startup-image" href="img/apple-touch-startup-image-320x460.png">
-<link rel="apple-touch-startup-image" href="img/apple-touch-startup-image-640x920.png" media="(-webkit-min-device-pixel-ratio: 2)">
-<link rel="apple-touch-startup-image" href="img/apple-touch-startup-image-640x1096.png" media="(device-height: 568px)">
-<link rel="stylesheet" href="dist/main.min.css" />
-<script src="dist/main.min.js"></script>
-<script>
-$.extend(spring.config, {
-  // my blog title
-  title: 'Sprng',
-  // my blog description
-  desc: "A blog engine written by GitHub Issues  \n[Fork me on GitHub](https://github.com/zhaoda/spring)",
-  // my github username
-  owner: 'zhaoda',
-  // creator's username
-  creator: 'zhaoda',
-  // the repository name on github for writting issues
-  repo: 'spring',
-  // custom page
-  pages: [
-    {name: 'About Spring', number: 1},
-    {name: 'Quick Start', number: 2}
-  ]
-})
-</script>
-<!-- analysis begin // please delete it -->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?a9787f0ab45d5e237bab522431d0a7ec";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-<!-- analysis end -->
+    <meta charset="utf-8">
+    <title>my note</title> <!-- 将此处改为你想要的网站标题 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.1.0/build/pure-min.css">
+    <style>
+        body { padding: 20px; max-width: 800px; margin: auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+        .issue { border-bottom: 1px solid #eee; padding: 15px 0; }
+        .meta { color: #666; font-size: 0.9em; }
+    </style>
 </head>
 <body>
-<!--[if lt IE 9]>
-<script>
-location.href = 'https://github.com/' + spring.config.owner + '/' + spring.config.repo + '/issues?page=1&state=open'
-</script>
-<![endif]-->
+    <h1>My Note</h1> <!-- 将此处改为你想要的网站主标题 -->
+    <p>这里是我创作和收集的所有文章(大概)。</p>
+
+    <div id="issues">
+        <p>加载中...</p>
+    </div>
+
+    <script>
+        // !!! 配置区域：请修改下面两个变量为你的信息 !!!
+        const owner = '{ffoffff}'; // 例如：owner = 'student-writer-2024';
+        const repo = '{ffoffff.github.io}';        // 通常是：repo = 'student-writer-2024.github.io';
+
+        // 获取Issues数据的函数
+        async function fetchIssues() {
+            const apiUrl = `https://api.github.com/repos/${owner}/${repo}/issues?state=open`;
+            try {
+                const response = await fetch(apiUrl);
+                const issues = await response.json();
+                displayIssues(issues);
+            } catch (error) {
+                document.getElementById('issues').innerHTML = '<p>加载失败，请检查配置。</p>';
+                console.error('Error:', error);
+            }
+        }
+
+        // 展示Issues到页面的函数
+        function displayIssues(issues) {
+            const issuesContainer = document.getElementById('issues');
+            if (issues.length === 0) {
+                issuesContainer.innerHTML = '<p>暂无作文。</p>';
+                return;
+            }
+
+            issuesContainer.innerHTML = ''; // 清空加载中提示
+            issues.forEach(issue => {
+                // 过滤掉不是作文的Issue（比如评论、讨论等）
+                if (!issue.title || issue.pull_request) return;
+
+                const issueDiv = document.createElement('div');
+                issueDiv.className = 'issue';
+                issueDiv.innerHTML = `
+                    <h3><a href="${issue.html_url}" target="_blank">${issue.title}</a></h3>
+                    <div class="meta">
+                        #${issue.number} 创建于 ${new Date(issue.created_at).toLocaleDateString('zh-CN')}
+                    </div>
+                    <p>${issue.body ? issue.body.substring(0, 150) + '...' : '暂无内容摘要'}</p>
+                `;
+                issuesContainer.appendChild(issueDiv);
+            });
+        }
+
+        // 页面加载完成后执行获取操作
+        document.addEventListener('DOMContentLoaded', fetchIssues);
+    </script>
 </body>
 </html>
