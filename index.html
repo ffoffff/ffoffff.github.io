@@ -134,15 +134,10 @@
             margin-bottom: 20px;
         }
 
-        .controls {
+        .theme-toggle {
             position: absolute;
             top: 20px;
             right: 0;
-            display: flex;
-            gap: 15px;
-        }
-
-        .control-btn {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 30px;
@@ -153,15 +148,14 @@
             gap: 8px;
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
         }
 
-        .control-btn:hover {
+        .theme-toggle:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
         }
 
-        .control-btn i {
+        .theme-toggle i {
             color: var(--primary-accent);
             font-size: 1.2rem;
         }
@@ -426,7 +420,7 @@
             color: var(--text-primary);
         }
 
-        .page-loader {
+        .loader {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -434,7 +428,7 @@
             grid-column: 1 / -1;
         }
 
-        .page-spinner {
+        .spinner {
             width: 60px;
             height: 60px;
             border: 3px solid rgba(100, 255, 218, 0.3);
@@ -443,7 +437,7 @@
             animation: spin 1.2s ease-in-out infinite;
         }
 
-        .light-mode .page-spinner {
+        .light-mode .spinner {
             border: 3px solid rgba(100, 150, 255, 0.3);
             border-top-color: #4a6bff;
         }
@@ -490,11 +484,12 @@
                 font-size: 0.95rem;
             }
 
-            .controls {
+            .theme-toggle {
                 position: relative;
                 top: 0;
+                margin: 0 auto 20px;
                 justify-content: center;
-                margin-bottom: 20px;
+                width: 140px;
             }
         }
 
@@ -531,11 +526,6 @@
                 padding: 12px 20px;
                 font-size: 0.9rem;
             }
-
-            .controls {
-                flex-direction: column;
-                gap: 10px;
-            }
         }
     </style>
 </head>
@@ -546,12 +536,9 @@
         <div class="header">
             <h1 class="site-title">My or You</h1>
             <p class="site-subtitle">FF</p>
-            
-            <div class="controls">
-                <div class="control-btn" id="theme-toggle">
-                    <i class="fas fa-moon"></i>
-                    <span>夜间模式</span>
-                </div>
+            <div class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+                <span>夜间模式</span>
             </div>
         </div>
         
@@ -565,14 +552,16 @@
         </div>
         
         <div class="articles-grid" id="articles-container">
-            <div class="page-loader">
-                <div class="page-spinner"></div>
+            <div class="loader">
+                <div class="spinner"></div>
             </div>
         </div>
     </div>
 
     <!-- 投稿按钮 - 直接跳转到 GitHub Issues -->
-    <a href="https://github.com/ffoffff/ffoffff.github.io/issues/new" target="_blank" class="submit-button">
+    <a href="https://github.com/ffoffff/ffoffff.github.io/issues/new" 
+       target="_blank" 
+       class="submit-button">
         <i class="fas fa-plus"></i> 我要投稿
     </a>
 
@@ -655,7 +644,7 @@
                     <div class="empty-state">
                         <i class="fas fa-exclamation-triangle"></i>
                         <h2>加载失败</h2>
-                        <p>请检查网络连接或稍后重试</p>
+                        <p>${error.message || '请检查网络连接或稍后重试'}</p>
                     </div>
                 `;
             }
@@ -667,15 +656,15 @@
                 document.getElementById('articles-container').style.display = 'none';
                 document.getElementById('article-detail').style.display = 'block';
                 document.getElementById('article-content').innerHTML = `
-                    <div class="page-loader">
-                        <div class="page-spinner"></div>
+                    <div class="loader">
+                        <div class="spinner"></div>
                     </div>
                 `;
                 
                 let issue = currentState.articles.find(a => a.number === issueNumber);
                 
                 if (!issue || !issue.body) {
-                    const apiUrl = `https://api.github.com/repos/${config.owner}/${config.repo}/issues/${issueNumber}`;
+                    const apiUrl = `极光https://api.github.com/repos/${config.owner}/${config.repo}/issues/${issueNumber}`;
                     const response = await fetch(apiUrl);
                     
                     if (!response.ok) {
@@ -702,7 +691,7 @@
                     <div class="empty-state">
                         <i class="fas fa-exclamation-triangle"></i>
                         <h2>加载失败</h2>
-                        <p>无法加载文章内容</p>
+                        <p>${error.message || '无法加载文章内容'}</p>
                     </div>
                 `;
             }
@@ -741,7 +730,7 @@
         function initTheme() {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'light') {
-                toggleTheme();
+                toggleTheme(); // 切换到日间模式
             }
         }
 
@@ -773,5 +762,3 @@
     </script>
 </body>
 </html>
-
-
