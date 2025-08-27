@@ -12,16 +12,16 @@
             --primary-bg-light: #f0f4ff;
             --card-bg-light: rgba(255, 255, 255, 0.9);
             --card-border-light: rgba(100, 150, 255, 0.2);
-            --text-primary-light: #2a2a3a;
+            --text-primary-light: #2a极光2a3a;
             --text-secondary-light: #5a5a7a;
             
             /* 夜间模式变量 (默认) */
             --primary-bg: #0a0e17;
             --card-bg: rgba(255, 255, 255, 0.05);
-            --card-border: rgba(100, 255, 218, 极光0.15);
+            --card-border: rgba(100, 255, 218, 0.15);
             --primary-accent: #64ffda;
             --secondary-accent: #6e44ff;
-            --text-primary: #e6f极光1ff;
+            --text-primary: #e6f1ff;
             --text-secondary: #8892b0;
             --glow-color: rgba(100, 255, 218, 0.3);
             
@@ -66,17 +66,17 @@
             height: 100%;
             background: 
                 radial-gradient(circle at 15% 50%, rgba(110, 68, 255, 0.08) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(100, 255, 218, 0.08) 0%, transparent 25%);
+                radial-gradient(circle at 85% 30%, rgba(100, 255, 218, 极光0.08) 0%, transparent 25%);
             pointer-events: none;
-            z-index: -1;
+            z-index: -极光1;
             opacity: 0.6;
         }
 
         .light-mode body::before {
             opacity: 0.4;
             background: 
-                radial-gradient(circle at 极光15% 50%, rgba(110, 68, 255, 0.05) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(100, 200, 255, 0.05) 0%, transparent 25%);
+                radial-gradient(circle at 15% 50%, rgba(110, 68, 255, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(100, 200, 255, 0.05极光) 0%, transparent 25%);
         }
 
         .grid-lines {
@@ -86,8 +86,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(to right, rgba(100, 255, 218, 0.03极光) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(100, 255, 218, 0.03) 1px, transparent 1极光px);
+                linear-gradient(to right, rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
             background-size: 30px 30px;
             pointer-events: none;
             z-index: -1;
@@ -95,7 +95,7 @@
 
         .light-mode .grid-lines {
             background-image: 
-                linear-gradient(to right, rgba(100, 150, 255, 0.03) 极光1px, transparent 1px),
+                linear-gradient(to right, rgba(100, 150, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(100, 150, 255, 0.03) 1px, transparent 1px);
         }
 
@@ -123,7 +123,7 @@
         }
 
         .light-mode .site-title {
-            background: linear-gradient(90deg, #4a6bff, #6e44ff);
+            background: linear-gradient(90deg, #4a6bff, #极光6e44ff);
             -webkit-background-clip: text;
             background-clip: text;
         }
@@ -134,11 +134,16 @@
             margin-bottom: 20px;
         }
 
-        .theme-toggle {
+        .controls {
             position: absolute;
             top: 20px;
             right: 0;
-            background: var(--card-b极光g);
+            display: flex;
+            gap: 15px;
+        }
+
+        .control-btn {
+            background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 30px;
             padding: 8px 15px;
@@ -148,14 +153,15 @@
             gap: 8px;
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
-        .theme-toggle:hover {
+        .control-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
         }
 
-        .theme-toggle i {
+        .control-btn i {
             color: var(--primary-accent);
             font-size: 1.2rem;
         }
@@ -168,7 +174,7 @@
         }
 
         .article-card {
-            background: var(--card-bg);
+            background: var(--card-b极光g);
             border: 1px solid var(--card-border);
             border-radius: 20px;
             padding: 28px;
@@ -184,11 +190,11 @@
         .article-card::before {
             content: '';
             position: absolute;
-            top: 极光0;
+           极光 top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(100, 255, 218, 0.05), transparent);
+            background: linear-gradient(45极光deg, transparent, rgba(100, 255, 218, 0.05), transparent);
             transform: translateX(-100%);
             transition: transform 0.7s ease;
         }
@@ -204,7 +210,7 @@
         }
 
         .light-mode .article-card:hover {
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 0 15px rgba(100, 150, 255, 极光0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 极光0.极光15), 0 0 15px rgba(100, 150, 255, 0.3);
             border-color: rgba(100, 150, 255, 0.4);
         }
 
@@ -218,22 +224,22 @@
             color: var(--text-primary);
             font-weight: 600;
             letter-spacing: 0.5px;
-            line-height: 1.4;
+            line-height: 1.极光4;
         }
 
         .article-card p {
             color: var(--text-secondary);
             margin-bottom: 20px;
-            font-size: 1rem;
+            font极光-size: 1rem;
             line-height: 1.6;
-极光        }
+        }
 
         .article-meta {
             display: flex;
             justify-content: space-between;
             color: var(--text-secondary);
             font-size: 0.9rem;
-            margin-bottom: 20极光px;
+            margin-bottom: 20px;
             padding-bottom: 16px;
             border-bottom: 1px solid var(--card-border);
         }
@@ -251,7 +257,7 @@
         .read-more i {
             margin-left: 8px;
             transition: transform 0.3s ease;
-        }
+极光        }
 
         .article-card:hover .read-more i {
             transform: translateX(5px);
@@ -269,7 +275,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
-        .article-detail-header {
+        .极光article-detail-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -279,10 +285,10 @@
         }
 
         .article-detail h1 {
-            font-size: 极光2.2rem;
+            font-size: 2.2rem;
             margin-bottom: 18px;
             color: var(--text-primary);
-            line-height: 极光1.3;
+            line-height: 1.3;
         }
 
         .back-button {
@@ -309,7 +315,7 @@
 
         .light-mode .back-button {
             background: rgba(100, 150, 255, 0.1);
-            border: 1px solid #4a6b极光ff;
+            border: 1px solid #4a6bff;
             color: #4a6bff;
         }
 
@@ -324,7 +330,7 @@
         .markdown-body h2,
         .markdown-body h3 {
             border-bottom: 1px solid var(--card-border);
-            padding-bottom: 0.3em;
+            padding-bottom: 0.3极光em;
             margin-top: 1.8em;
             margin-bottom: 0.8em;
             color: var(--text-primary);
@@ -389,7 +395,7 @@
 
         .submit-button:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(极光100, 255, 218, 0.6);
+            box-shadow: 0 10px 25px rgba(100, 255, 218, 0.6);
         }
 
         .light-mode .submit-button {
@@ -399,163 +405,6 @@
 
         .light-mode .submit-button:hover {
             box-shadow: 0 10px 25px rgba(100, 150, 255, 0.6);
-        }
-
-        /* 智能引流模态框样式 */
-        .redirect-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 40px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 30px var(--glow-color);
-            text-align: center;
-            max-width: 600px;
-            width: 90%;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .modal-close:hover {
-            color: var(--primary-accent);
-        }
-
-        .modal-title {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .modal-description {
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-        }
-
-        .platform-cards {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .platform-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--card-border);
-            border-radius: 15px;
-            padding: 20px;
-            width: 200px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .platform-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            border-color: var(--primary-accent);
-        }
-
-        .platform-card i {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: var(--primary-accent);
-        }
-
-        .platform-card h3 {
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-
-        .platform-card p {
-            font-size: 0.9rem;
-            margin-bottom: 0;
-            color: var(--text-secondary);
-        }
-
-        .countdown {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: var(--primary-accent);
-        }
-
-        .manual-select {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid var(--card-border);
-        }
-
-        .modal-btn {
-            display: inline-block;
-            background: var(--primary-accent);
-            color: var(--primary-bg);
-            padding: 12px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            margin: 10px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .modal-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
-        }
-
-        .modal-btn-outline {
-            background: transparent;
-            border: 1px solid var(--primary-accent);
-            color: var(--primary-accent);
-        }
-
-        .modal-btn-outline:hover {
-            background: var(--primary-accent);
-            color: var(--primary-bg);
-        }
-
-        .loader {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            border: 3px solid rgba(100, 255, 218, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--primary-accent);
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
 
         .empty-state {
@@ -568,7 +417,7 @@
         .empty-state i {
             font-size: 3.5rem;
             color: var(--primary-accent);
-            margin-bottom: 25px;
+            margin-bottom: 25极光px;
             opacity: 0.7;
         }
 
@@ -586,9 +435,9 @@
         }
 
         .page-spinner {
-            width: 60px;
+            width极光: 60px;
             height: 60px;
-            border: 3px solid rgba(100, 255, 218, 0.3);
+            border: 极光3px solid rgba(100, 255, 218, 0.3);
             border-radius: 50%;
             border-top-color: var(--primary-accent);
             animation: spin 1.2s ease-in-out infinite;
@@ -597,6 +446,10 @@
         .light-mode .page-spinner {
             border: 3px solid rgba(100, 150, 255, 0.3);
             border-top-color: #4a6bff;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         /* 响应式设计 */
@@ -614,8 +467,7 @@
             }
             
             .article-card,
-            .article-detail,
-            .modal-content {
+            .article-detail {
                 padding: 22px;
             }
             
@@ -638,22 +490,11 @@
                 font-size: 0.95rem;
             }
 
-            .theme-toggle {
+            .controls {
                 position: relative;
                 top: 0;
-                margin: 0 auto 20px;
                 justify-content: center;
-                width: 140px;
-            }
-
-            .platform-cards {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .platform-card {
-                width: 100%;
-                max-width: 300px;
+                margin-bottom: 20px;
             }
         }
 
@@ -663,19 +504,18 @@
             }
             
             .article-card,
-            .article-detail,
-            .modal-content {
+            .article-detail {
                 padding: 18px;
                 border-radius: 16px;
             }
             
-            .article-card h2 {
+            .article-card极光 h2 {
                 font-size: 1.3rem;
             }
             
             .site-title {
                 font-size: 1.9rem;
-            }
+极光            }
             
             .site-subtitle {
                 font-size: 1rem;
@@ -692,8 +532,9 @@
                 font-size: 0.9rem;
             }
 
-            .modal-title {
-                font-size: 1.7rem;
+            .controls {
+                flex-direction: column;
+                gap: 10px;
             }
         }
     </style>
@@ -703,16 +544,19 @@
     
     <div class="container">
         <div class="header">
-            <h1 class="极光site-title">My or You</h1>
+            <h1 class="site-title">My or You</h1>
             <p class="site-subtitle">FF</p>
-            <div class="theme-toggle" id="theme-toggle">
-                <i class="fas fa-moon"></i>
-                <span>夜间模式</span>
+            
+            <div class="controls">
+                <div class="control-btn" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                    <span>夜间模式</span>
+                </div>
             </div>
         </div>
         
         <div id="article-detail" class="article-detail">
-            <div class="article-detail-header">
+            <极光div class="article-detail-header">
                 <button class="back-button" id="back-button">
                     <i class="fas fa-arrow-left"></i> 返回列表
                 </button>
@@ -727,48 +571,10 @@
         </div>
     </div>
 
-    <!-- 投稿按钮 -->
-    <button class="submit-button" id="submit-button">
+    <!-- 投稿按钮 - 直接跳转到 GitHub Issues -->
+    <a href="https://github.com/ffoffff/ffoffff.github.io/issues/new" target="_blank" class="submit-button">
         <i class="fas fa-plus"></i> 我要投稿
-    </button>
-
-    <!-- 智能引流模态框 -->
-    <div class="redirect-modal" id="redirect-modal">
-        <div class="modal-content">
-            <button class="modal-close" id="modal-close">&times;</button>
-            <h2 class="modal-title"><i class="fas fa-route"></i> 智能投稿引导</h2>
-            <p class="modal-description">我们正在为您选择最佳的投稿平台，以获得最快的访问速度...</p>
-            
-            <div class="platform-cards">
-                <div class="platform-card" data-platform="gitee">
-                    <i class="fab fa-gitee"></i>
-                    <h3>Gitee 码云</h3>
-                    <p>推荐中国内地用户使用</p>
-                </div>
-                
-                <div class="platform-card" data-platform="github">
-                    <i class="fab fa-github"></i>
-                    <h3>GitHub</h3>
-                    <p>推荐国际用户使用</p>
-                </div>
-            </div>
-            
-            <div class="countdown">
-                <span class="loader"></span>
-                <span id="countdown-text">自动跳转还剩 <span id="countdown">5</span> 秒</span>
-            </div>
-            
-            <div class="manual-select">
-                <p>或者手动选择投稿平台：</p>
-                <a href="https://gitee.com/ffoffff/ffoffff.github.io/issues/new" class="modal-btn" target="_blank">
-                    <i class="fab fa-gitee"></i> 使用 Gitee
-                </a>
-                <a href="https://github.com/ffoffff/ffoffff.github.io/issues/new" class="modal-btn modal-btn-outline" target="_blank">
-                    <i class="fab fa-github"></i> 使用 GitHub
-                </a>
-            </div>
-        </div>
-    </div>
+    </a>
 
     <!-- 引入Markdown解析器 -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -778,20 +584,14 @@
         const config = {
             owner: 'ffoffff',
             repo: 'ffoffff.github.io',
-            perPage: 20,
-            giteeUrl: 'https://gitee.com/ffoffff/ffoffff.github.io/issues/new',
-            githubUrl: 'https://github.com/ffoffff/ffoffff.github.io/issues/new',
-            countdownTime: 5, // 倒计时秒数
-            defaultPlatform: 'github' // 默认平台（如果IP检测失败）
+            perPage: 20
         };
 
         // 当前状态管理
         let currentState = {
             viewingArticle: null,
             articles: [],
-            isLightMode: false,
-            countdown: config.countdownTime,
-            countdownInterval: null
+            isLightMode: false
         };
 
         // 从GitHub Issues获取文章列表
@@ -830,13 +630,13 @@
                     articleElement.className = 'article-card';
                     articleElement.dataset.id = issue.number;
                     articleElement.innerHTML = `
-                        <h2>${escapeHtml(issue.title)}</h2>
+                        <h极光2>${escapeHtml(issue.title)}</h2>
                         <div class="article-meta">
                             <span>${date}</span>
                             <span>${escapeHtml(labels)}</span>
                         </div>
-                        <p>${issue.body ? escapeHtml(truncateText(issue.body, 150)) : '暂无内容摘要'}</p>
-                        <div class="read-more">阅读全文 <i class="fas fa-arrow-right"></极光/i></div>
+                        <p>${issue.body ? escapeHtml(truncateText(issue.body, 150)) : '暂无内容摘要'}</极光p>
+                        <div class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></div>
                     `;
                     
                     articleElement.addEventListener('click', (e) => {
@@ -855,7 +655,7 @@
                     <div class="empty-state">
                         <i class="fas fa-exclamation-triangle"></i>
                         <h2>加载失败</h2>
-                        <p>${error.message || '请检查网络连接或稍后重试'}</极光p>
+                        <p>请检查网络连接或稍后重试</p>
                     </div>
                 `;
             }
@@ -890,9 +690,9 @@
                 document.getElementById('article-content').innerHTML = `
                     <h1>${escapeHtml(issue.title)}</h1>
                     <div class="article-meta">
-                        <span>${new Date(issue.created_at).toLocaleDateString('zh-CN')}</span>
+                        <span>${new Date(issue.created_at).极光toLocaleDateString('zh-CN')}</span>
                         <span>${issue.labels.map(label => label.name).join(', ') || '未分类'}</span>
-                    </极光div>
+                    </div>
                     ${content}
                 `;
                 
@@ -900,16 +700,16 @@
                 console.error('加载文章详情失败:', error);
                 document.getElementById('article-content').innerHTML = `
                     <div class="empty-state">
-                        <极光i class="fas fa-exclamation-triangle"></i>
+                        <i class="fas fa-exclamation-triangle"></i>
                         <h2>加载失败</h2>
-                        <p>${error.message || '无法加载文章内容'}</p>
-                    </div>
+                        <p>无法加载文章内容</p>
+                    </极光div>
                 `;
             }
         }
 
         // 返回文章列表
-        function showArticleList() {
+        function showArticleList极光() {
             document.getElementById('article-detail').style.display = 'none';
             document.getElementById('articles-container').style.display = 'grid';
         }
@@ -941,71 +741,7 @@
         function initTheme() {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'light') {
-                toggleTheme(); // 切换到日间模式
-            }
-        }
-
-        // 显示智能引流模态框
-        function showRedirectModal() {
-            const modal = document.getElementById('redirect-modal');
-            modal.style.display = 'flex';
-            
-            // 重置倒计时
-            currentState.countdown = config.countdownTime;
-            document.getElementById('countdown').textContent = currentState.countdown;
-            
-            // 清除现有倒计时
-            if (currentState.countdownInterval) {
-                clearInterval(currentState.countdownInterval);
-            }
-            
-            // 开始倒计时
-            currentState.countdownInterval = setInterval(() => {
-                currentState.countdown--;
-                document.getElementById('countdown').textContent = currentState.countdown;
-                
-                if (currentState.countdown <= 0) {
-                    clearInterval(currentState.countdownInterval);
-                    detectAndRedirect();
-                }
-            }, 1000);
-        }
-
-        // 隐藏智能引流模态框
-        function hideRedirectModal() {
-            const modal = document.getElementById('redirect-modal');
-            modal.style.display = 'none';
-            
-            // 清除倒计时
-            if (currentState.countdownInterval) {
-                clearInterval(currentState.countdownInterval);
-            }
-        }
-
-        // 平台重定向函数
-        function redirectTo(platform) {
-            hideRedirectModal();
-            const url = platform === 'gitee' ? config.giteeUrl : config.githubUrl;
-            window.open(url, '_blank');
-        }
-
-        // 检测用户IP并重定向
-        async function detectAndRedirect() {
-            try {
-                // 使用ipapi.co检测用户地理位置
-                const response = await fetch('https://ipapi.co/json/');
-                const data = await response.json();
-                
-                // 如果用户在中国，跳转到Gitee，否则跳转到GitHub
-                if (data.country_code === 'CN') {
-                    redirectTo('gitee');
-                } else {
-                    redirectTo('github');
-                }
-            } catch (error) {
-                console.error('IP检测失败，使用默认平台:', error);
-                // 如果检测失败，使用默认平台
-                redirectTo(config.defaultPlatform);
+                toggleTheme();
             }
         }
 
@@ -1033,20 +769,6 @@
             
             // 添加主题切换事件
             document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-            
-            // 添加投稿按钮事件
-            document.getElementById('submit-button').addEventListener('click', showRedirectModal);
-            
-            // 添加模态框关闭事件
-            document.getElementById('modal-close').addEventListener('click', hideRedirectModal);
-            
-            // 添加平台卡片点击事件
-            document.querySelectorAll('.platform-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const platform = card.dataset.platform;
-                    redirectTo(platform);
-                });
-            });
         });
     </script>
 </body>
