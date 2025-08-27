@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Note time awa</title>
+    <title>My Note</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="极光https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
     <style>
         :root {
             --primary-bg: #0a0e17;
@@ -15,7 +15,7 @@
             --secondary-accent: #6e44ff;
             --text-primary: #e6f1ff;
             --text-secondary: #8892b0;
-            --glow-color: rgba(极光100, 255, 218, 0.3);
+            --glow-color: rgba(100, 255, 218, 0.3);
         }
 
         * {
@@ -44,7 +44,7 @@
             height: 100%;
             background: 
                 radial-gradient(circle at 15% 50%, rgba(110, 68, 255, 0.08) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(100, 255, 218, 0.08) 0%, transparent 25%);
+                radial-gradient(circle at 85% 30%, rgba(100, 255, 218, 0.08) 极光0%, transparent 25%);
             pointer-events: none;
             z-index: -1;
         }
@@ -57,14 +57,14 @@
             height: 100%;
             background-image: 
                 linear-gradient(to right, rgba(100, 255, 218, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(100极光, 255, 218, 0.03) 1px, transparent 极光1px);
+                linear-gradient(to bottom, rgba(100, 255, 218, 0.03) 1px, transparent 1极光px);
             background-size: 30px 30px;
             pointer-events: none;
             z-index: -1;
         }
 
         .container {
-            max-width: 1200极光px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -93,6 +93,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
+            margin-bottom: 60px;
         }
 
         .article-card {
@@ -123,7 +124,7 @@
 
         .article-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 极光0.3), 0 0 20px var(--glow-color);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--glow-color);
             border-color: rgba(100, 255, 218, 0.4);
         }
 
@@ -139,7 +140,7 @@
             letter-spacing: 0.5px;
         }
 
-极光        .article-card p {
+        .article-card p {
             color: var(--text-secondary);
             margin-bottom: 20px;
             font-size: 0.95rem;
@@ -172,7 +173,7 @@
         /* 文章详情页样式 */
         .article-detail {
             display: none;
-            background: var(--card-bg);
+            background: var(--card极光-bg);
             border: 1px solid var(--card-border);
             border-radius: 16px;
             padding: 30px;
@@ -202,14 +203,14 @@
             padding: 8px 16px;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s极光 ease;
+            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
         }
 
         .back-button i {
             margin-right: 8px;
-极光        }
+        }
 
         .back-button:hover {
             background: rgba(100, 255, 218, 0.2);
@@ -218,7 +219,7 @@
         .markdown-body {
             color: var(--text-primary);
             background: transparent;
-            font-size: 1极光rem;
+            font-size: 1rem;
             line-height: 1.6;
         }
 
@@ -256,6 +257,110 @@
             padding: 0;
         }
 
+        /* 投稿按钮和模态框 */
+        #submit-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 15px;
+            background: var(--primary-accent);
+            color: var(--primary-bg);
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        #submit-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        #submit-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: var(--primary-accent);
+        }
+
+        .modal-content input, .modal-content textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--card-border);
+            color: var(--text-primary);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .modal-content textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .modal-actions button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        #cancel-btn {
+            background: var(--text-secondary);
+            color: white;
+        }
+
+        .submit-btn {
+            background: var(--primary-accent);
+            color: var(--primary-bg);
+        }
+
+        #form-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
         .empty-state {
             text-align: center;
             padding: 60px 20px;
@@ -282,7 +387,7 @@
             height: 50px;
             border: 3px solid rgba(100, 255, 218, 0.3);
             border-radius: 50%;
-            border-top极光-color: var(--primary-accent);
+            border-top-color: var(--primary-accent);
             animation: spin 1s ease-in-out infinite;
         }
 
@@ -298,7 +403,8 @@
             }
             
             .article-card,
-            .article-detail {
+            .article-detail,
+            .modal-content {
                 padding: 20px;
             }
             
@@ -311,7 +417,15 @@
             }
             
             .article-detail h1 {
-                font-size: 极光1.6rem;
+                font-size: 1.6rem;
+            }
+
+            #submit-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
             }
         }
 
@@ -321,7 +435,8 @@
             }
             
             .article-card,
-            .article-detail {
+            .article-detail,
+            .modal-content {
                 padding: 18px;
             }
             
@@ -340,6 +455,15 @@
             .article-detail h1 {
                 font-size: 1.4rem;
             }
+
+            .modal-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .modal-actions button {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -348,7 +472,7 @@
     
     <div class="container">
         <div class="header">
-            <h1 class="site-title">My Note</h1>
+            <h1 class="site-title">My Note or You Note</h1>
             <p class="site-subtitle">FF</p>
         </div>
         
@@ -368,15 +492,38 @@
         </div>
     </div>
 
+    <!-- 投稿按钮 -->
+    <button id="submit-btn" title="投稿">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- 投稿模态框 -->
+    <div id="submit-modal">
+        <div class="modal-content">
+            <h2><i class="fas fa-pencil-alt"></i> 分享您的文章</h2>
+            <form id="submit-form">
+                <input type="text" name="title" placeholder="文章标题" required>
+                <textarea name="body" placeholder="请输入您的文章内容（支持Markdown格式）..." required></textarea>
+                <input type="text" name="author" placeholder="您的名字（可选）">
+                <div class="modal-actions">
+                    <button type="button" id="cancel-btn">取消</button>
+                    <button type="submit" class="submit-btn">提交</button>
+                </div>
+            </form>
+            <div id="form-message"></div>
+        </div>
+    </div>
+
     <!-- 引入Markdown解析器 -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
     <script>
-        // 配置您的GitHub信息
+        // 配置信息 - 请根据您的实际信息修改
         const config = {
-            owner: 'ffoffff', // 已设置为您的GitHub用户名
-            repo: 'ffoffff.github.io',   // 已设置为您的仓库名
-            perPage: 20,                    // 每页显示的文章数量
+            owner: 'ffoffff', // 您的GitHub用户名
+            repo: 'ffoffff.github.io', // 您的仓库名
+            perPage: 20, // 每页显示的文章数量
+            workerUrl: 'https://blog-submit-handler.zhiqiqiu559.workers.dev' // 您的Cloudflare Worker地址
         };
 
         // 当前状态管理
@@ -404,7 +551,7 @@
                     container.innerHTML = `
                         <div class="empty-state">
                             <i class="fas fa-file-alt"></i>
-                            <h极光2>暂无文章</h2>
+                            <h2>暂无文章</h2>
                             <p>在GitHub Issues中创建您的第一篇文章</p>
                         </div>
                     `;
@@ -426,12 +573,12 @@
                         <div class="article-meta">
                             <span>${date}</span>
                             <span>${escapeHtml(labels)}</span>
-                        </极光div>
+                        </div>
                         <p>${issue.body ? escapeHtml(truncateText(issue.body, 150)) : '暂无内容摘要'}</p>
                         <div class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></div>
                     `;
                     
-                    // 添加点击事件 - 修复：阻止跳转到GitHub
+                    // 添加点击事件
                     articleElement.addEventListener('click', (e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -462,7 +609,7 @@
                 document.getElementById('articles-container').style.display = 'none';
                 document.getElementById('article-detail').style.display = 'block';
                 document.getElementById('article-content').innerHTML = `
-                    <div class="loader">
+                    <div class极光="loader">
                         <div class="spinner"></div>
                     </div>
                 `;
@@ -513,6 +660,68 @@
             document.getElementById('articles-container').style.display = 'grid';
         }
 
+        // 投稿功能
+        function setupSubmissionForm() {
+            const submitBtn = document.getElementById('submit-btn');
+            const modal = document.getElementById('submit-modal');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const form = document.getElementById('submit-form');
+            const messageDiv = document.getElementById('form-message');
+            
+            // 点击右下角按钮打开模态框
+            submitBtn.addEventListener('click', () => {
+                modal.style.display = 'flex';
+            });
+            
+            // 点击取消按钮关闭模态框
+            cancelBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+                messageDiv.innerHTML = '';
+                form.reset();
+            });
+            
+            // 处理表单提交
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const submission = {
+                    title: formData.get('title'),
+                    body: formData.get('body'),
+                    author: formData.get('author') || '匿名用户'
+                };
+                
+                messageDiv.innerHTML = '提交中，请稍候...';
+                messageDiv.style.color = 'var(--text-secondary)';
+                
+                try {
+                    const response = await fetch(config.workerUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(submission)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        messageDiv.style.color = 'var(--primary-accent)';
+                        messageDiv.innerHTML = `✅ ${result.message}`;
+                        form.reset();
+                        // 3秒后自动关闭模态框
+                        setTimeout(() => { 
+                            modal.style.display = 'none';
+                            // 刷新文章列表
+                            loadArticles();
+                        }, 3000);
+                    } else {
+                        throw new Error(result.message);
+                    }
+                } catch (error) {
+                    messageDiv.style.color = 'red';
+                    messageDiv.innerHTML = `❌ ${error.message}`;
+                }
+            });
+        }
+
         // 辅助函数：截断文本
         function truncateText(text, maxLength) {
             if (!text || text.length <= maxLength) return text;
@@ -527,12 +736,15 @@
             return div.innerHTML;
         }
 
-        // 页面加载时获取文章
+        // 页面加载时初始化
         window.addEventListener('load', () => {
             loadArticles();
             
             // 添加返回按钮事件
             document.getElementById('back-button').addEventListener('click', showArticleList);
+            
+            // 设置投稿表单
+            setupSubmissionForm();
         });
     </script>
 </body>
