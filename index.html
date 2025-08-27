@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的文章空间</title>
+    <title>My Note time awa</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
+    <link rel="stylesheet" href="极光https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.min.css">
     <style>
         :root {
             --primary-bg: #0a0e17;
@@ -15,7 +15,7 @@
             --secondary-accent: #6e44ff;
             --text-primary: #e6f1ff;
             --text-secondary: #8892b0;
-            --glow-color: rgba(100, 255, 218, 0.3);
+            --glow-color: rgba(极光100, 255, 218, 0.3);
         }
 
         * {
@@ -57,14 +57,14 @@
             height: 100%;
             background-image: 
                 linear-gradient(to right, rgba(100, 255, 218, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+                linear-gradient(to bottom, rgba(100极光, 255, 218, 0.03) 1px, transparent 极光1px);
             background-size: 30px 30px;
             pointer-events: none;
             z-index: -1;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1200极光px;
             margin: 0 auto;
         }
 
@@ -123,7 +123,7 @@
 
         .article-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--glow-color);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 极光0.3), 0 0 20px var(--glow-color);
             border-color: rgba(100, 255, 218, 0.4);
         }
 
@@ -139,7 +139,7 @@
             letter-spacing: 0.5px;
         }
 
-        .article-card p {
+极光        .article-card p {
             color: var(--text-secondary);
             margin-bottom: 20px;
             font-size: 0.95rem;
@@ -160,20 +160,13 @@
             display: inline-flex;
             align-items: center;
             color: var(--primary-accent);
-            text-decoration: none;
             font-weight: 500;
             position: relative;
             padding: 8px 0;
-            transition: all 0.3s ease;
         }
 
         .read-more i {
             margin-left: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .read-more:hover i {
-            transform: translateX(5px);
         }
 
         /* 文章详情页样式 */
@@ -209,14 +202,14 @@
             padding: 8px 16px;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s极光 ease;
             display: inline-flex;
             align-items: center;
         }
 
         .back-button i {
             margin-right: 8px;
-        }
+极光        }
 
         .back-button:hover {
             background: rgba(100, 255, 218, 0.2);
@@ -225,7 +218,7 @@
         .markdown-body {
             color: var(--text-primary);
             background: transparent;
-            font-size: 1rem;
+            font-size: 1极光rem;
             line-height: 1.6;
         }
 
@@ -289,7 +282,7 @@
             height: 50px;
             border: 3px solid rgba(100, 255, 218, 0.3);
             border-radius: 50%;
-            border-top-color: var(--primary-accent);
+            border-top极光-color: var(--primary-accent);
             animation: spin 1s ease-in-out infinite;
         }
 
@@ -318,7 +311,7 @@
             }
             
             .article-detail h1 {
-                font-size: 1.6rem;
+                font-size: 极光1.6rem;
             }
         }
 
@@ -355,8 +348,8 @@
     
     <div class="container">
         <div class="header">
-            <h1 class="site-title">我的文章空间</h1>
-            <p class="site-subtitle">分享与探索</p>
+            <h1 class="site-title">My Note</h1>
+            <p class="site-subtitle">FF</p>
         </div>
         
         <div id="article-detail" class="article-detail">
@@ -381,8 +374,8 @@
     <script>
         // 配置您的GitHub信息
         const config = {
-            owner: 'ffoffff', // 替换为您的GitHub用户名
-            repo: 'ffoffff.github.io',   // 替换为您的仓库名
+            owner: 'ffoffff', // 已设置为您的GitHub用户名
+            repo: 'ffoffff.github.io',   // 已设置为您的仓库名
             perPage: 20,                    // 每页显示的文章数量
         };
 
@@ -411,7 +404,7 @@
                     container.innerHTML = `
                         <div class="empty-state">
                             <i class="fas fa-file-alt"></i>
-                            <h2>暂无文章</h2>
+                            <h极光2>暂无文章</h2>
                             <p>在GitHub Issues中创建您的第一篇文章</p>
                         </div>
                     `;
@@ -433,13 +426,15 @@
                         <div class="article-meta">
                             <span>${date}</span>
                             <span>${escapeHtml(labels)}</span>
-                        </div>
+                        </极光div>
                         <p>${issue.body ? escapeHtml(truncateText(issue.body, 150)) : '暂无内容摘要'}</p>
                         <div class="read-more">阅读全文 <i class="fas fa-arrow-right"></i></div>
                     `;
                     
-                    // 添加点击事件
-                    articleElement.addEventListener('click', () => {
+                    // 添加点击事件 - 修复：阻止跳转到GitHub
+                    articleElement.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         showArticleDetail(issue.number);
                     });
                     
@@ -538,15 +533,6 @@
             
             // 添加返回按钮事件
             document.getElementById('back-button').addEventListener('click', showArticleList);
-        });
-
-        // 处理浏览器前进后退
-        window.addEventListener('popstate', (event) => {
-            if (event.state && event.state.articleId) {
-                showArticleDetail(event.state.articleId);
-            } else {
-                showArticleList();
-            }
         });
     </script>
 </body>
